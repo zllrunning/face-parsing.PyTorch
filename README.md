@@ -2,7 +2,7 @@
 
 <p align="center">
 	<a href="https://github.com/zllrunning/face-parsing.PyTorch">
-    <img class="page-image" src="https://github.com/zllrunning/face-parsing.PyTorch/blob/master/2.jpg" >
+    <img class="page-image" src="https://github.com/zllrunning/face-parsing.PyTorch/blob/master/6.jpg" >
 	</a>
 </p>
 
@@ -27,7 +27,7 @@ Just run the train script:
     $ CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --nproc_per_node=2 train.py
 ```
 
-If you do not wish to train the model, you can download [our pre-trained model](https://drive.google.com/open?id=1eFSwZoSfVVroAy7LiGYybW6F8ErshoZW) and save it in `res/cp`.
+If you do not wish to train the model, you can download [our pre-trained model]() (coming soon) and save it in `res/cp`.
 
 
 ## Demo
