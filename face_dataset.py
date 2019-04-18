@@ -33,9 +33,9 @@ class FaceMask(Dataset):
             ])
         self.trans_train = Compose([
             ColorJitter(
-                brightness = 0.5,
-                contrast = 0.5,
-                saturation = 0.5),
+                brightness=0.5,
+                contrast=0.5,
+                saturation=0.5),
             HorizontalFlip(),
             RandomScale((0.75, 1.0, 1.25, 1.5, 1.75, 2.0)),
             RandomCrop(cropsize)
@@ -46,9 +46,9 @@ class FaceMask(Dataset):
         img = Image.open(osp.join(self.rootpth, 'CelebA-HQ-img', impth))
         img = img.resize((512, 512), Image.BILINEAR)
         label = Image.open(osp.join(self.rootpth, 'mask', impth[:-3]+'png')).convert('P')
-        print(np.unique(np.array(label)))
+        # print(np.unique(np.array(label)))
         if self.mode == 'train':
-            im_lb = dict(im = img, lb = label)
+            im_lb = dict(im=img, lb=label)
             im_lb = self.trans_train(im_lb)
             img, label = im_lb['im'], im_lb['lb']
         img = self.to_tensor(img)
