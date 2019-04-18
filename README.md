@@ -2,7 +2,7 @@
 
 <p align="center">
 	<a href="https://github.com/zllrunning/face-parsing.PyTorch">
-    <img class="page-image" src="https://github.com/zllrunning/hand-detection.PyTorch/blob/master/data/video/saveVideo.gif" >
+    <img class="page-image" src="https://github.com/zllrunning/face-parsing.PyTorch/blob/master/2.jpg" >
 	</a>
 </p>
 
