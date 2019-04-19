@@ -27,7 +27,7 @@ Just run the train script:
     $ CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --nproc_per_node=2 train.py
 ```
 
-If you do not wish to train the model, you can download [our pre-trained model]() (coming soon) and save it in `res/cp`.
+If you do not wish to train the model, you can download [our pre-trained model](https://drive.google.com/open?id=154JgKpzCPW82qINcVieuPH3fZ2e0P812) and save it in `res/cp`.
 
 
 ## Demo
