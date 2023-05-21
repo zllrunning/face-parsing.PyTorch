@@ -13,6 +13,9 @@ from PIL import Image
 import torchvision.transforms as transforms
 import cv2
 
+device = torch.device('cuda')
+
+
 def vis_parsing_maps(im, parsing_anno, stride, save_im=False, save_path='vis_results/parsing_map_on_im.jpg'):
     # Colors for all 20 parts
     part_colors = [[255, 0, 0], [255, 85, 0], [255, 170, 0],
@@ -55,7 +58,7 @@ def evaluate(respth='./res/test_res', dspth='./data', cp='model_final_diss.pth')
 
     n_classes = 19
     net = BiSeNet(n_classes=n_classes)
-    net.cuda()
+    net.to(device)
     save_pth = osp.join('res/cp', cp)
     net.load_state_dict(torch.load(save_pth))
     net.eval()
@@ -70,7 +73,7 @@ def evaluate(respth='./res/test_res', dspth='./data', cp='model_final_diss.pth')
             image = img.resize((512, 512), Image.BILINEAR)
             img = to_tensor(image)
             img = torch.unsqueeze(img, 0)
-            img = img.cuda()
+            img = img.to(device)
             out = net(img)[0]
             parsing = out.squeeze(0).cpu().numpy().argmax(0)
             # print(parsing)
