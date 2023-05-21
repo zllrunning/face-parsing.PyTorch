@@ -68,6 +68,29 @@ def evaluate(respth='./res/test_res', dspth='./data', cp='model_final_diss.pth')
         transforms.ToTensor(),
         transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
     ])
+    # save script module
+    jit_model = torch.jit.script(net)
+    jit_model.save('/tmp/face_parsing.pt')
+    # save onnx format
+    batch_size = 32
+    x = torch.randn(batch_size, 3, 512, 512, requires_grad=True).to(device)
+    torch.onnx.export(
+        net,
+        x,
+        '/tmp/face_parsing.onnx',
+        export_params=True,
+        opset_version=13,
+        do_constant_folding=True,
+        input_names=['input'],
+        output_names=['output', 'output16', 'output32'],
+        dynamic_axes={
+            'input' : {0: 'batch_size'},
+            'output' : {0: 'batch_size'},
+            'output16': {0: 'batch_size'},
+            'output32': {0: 'batch_size'},
+        },
+    )
+
     with torch.no_grad():
         for image_path in os.listdir(dspth):
             img = Image.open(osp.join(dspth, image_path))
