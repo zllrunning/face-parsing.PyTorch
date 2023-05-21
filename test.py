@@ -51,6 +51,7 @@ def vis_parsing_maps(im, parsing_anno, stride, save_im=False, save_path='vis_res
 
     # return vis_im
 
+
 def evaluate(respth='./res/test_res', dspth='./data', cp='model_final_diss.pth'):
 
     if not os.path.exists(respth):
@@ -80,11 +81,6 @@ def evaluate(respth='./res/test_res', dspth='./data', cp='model_final_diss.pth')
             print(np.unique(parsing))
 
             vis_parsing_maps(image, parsing, stride=1, save_im=True, save_path=osp.join(respth, image_path))
-
-
-
-
-
 
 
 if __name__ == "__main__":
