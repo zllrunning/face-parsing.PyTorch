@@ -75,7 +75,8 @@ class AttentionRefinementModule(nn.Module):
 
     def forward(self, x):
         feat = self.conv(x)
-        atten = F.avg_pool2d(feat, feat.size()[2:])
+        # atten = F.avg_pool2d(feat, feat.size()[2:])
+        atten = F.adaptive_avg_pool2d(feat, output_size=(1, 1))
         atten = self.conv_atten(atten)
         atten = self.bn_atten(atten)
         atten = self.sigmoid_atten(atten)
@@ -108,7 +109,8 @@ class ContextPath(nn.Module):
         H16, W16 = feat16.size()[2:]
         H32, W32 = feat32.size()[2:]
 
-        avg = F.avg_pool2d(feat32, feat32.size()[2:])
+        # avg = F.avg_pool2d(feat32, feat32.size()[2:])
+        avg = F.adaptive_avg_pool2d(feat32, output_size=(1, 1))
         avg = self.conv_avg(avg)
         avg_up = F.interpolate(avg, (H32, W32), mode='nearest')
 
@@ -200,7 +202,8 @@ class FeatureFusionModule(nn.Module):
     def forward(self, fsp, fcp):
         fcat = torch.cat([fsp, fcp], dim=1)
         feat = self.convblk(fcat)
-        atten = F.avg_pool2d(feat, feat.size()[2:])
+        # atten = F.avg_pool2d(feat, feat.size()[2:])
+        atten = F.adaptive_avg_pool2d(feat, output_size=(1, 1))
         atten = self.conv1(atten)
         atten = self.relu(atten)
         atten = self.conv2(atten)
